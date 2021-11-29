@@ -6,6 +6,8 @@ import imp
 
 def runPlugins():
     plugin_dir = pro_dir + "\\plugins"
+    if not os.path.isdir(plugin_dir):
+        os.mkdir(plugin_dir)
     x = os.listdir(plugin_dir)
     if '__pycache__' in x:
         x.remove('__pycache__')
