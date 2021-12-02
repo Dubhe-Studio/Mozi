@@ -34,7 +34,6 @@ def onStart():
     @bot.command(name='enable_use')
     async def enable_use_command(msg: Message):
         if is_op(msg):
-            print(is_op(msg))
             if msg.ctx.channel.id not in channel_id:
                 channel_id.append(msg.ctx.channel.id)
                 pluginJson.writeJson('MCPlus', 'config', 'channels', channel_id)
