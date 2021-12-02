@@ -1,8 +1,8 @@
 from rcon import Client
-from bot.api.PluginConfig import getConfig
+from bot.api.pluginConfig import getConfig
 
 
-def __runcommand(command: str, parameter: str):
+def __runcommand(command: str, parameter: str = None):
     address = getConfig('MCPlus', 'config', 'rcon', 'address')
     port = int(getConfig('MCPlus', 'config', 'rcon', 'port'))
     password = getConfig('MCPlus', 'config', 'rcon', 'password')
@@ -13,4 +13,9 @@ def __runcommand(command: str, parameter: str):
 
 def whitelistAdd(name: str):
     get = __runcommand('whitelist', 'add ' + name)
+    return get
+
+
+def seed():
+    get = __runcommand('execute', 'run seed')
     return get

@@ -24,5 +24,5 @@ def entry_point():
     async def help_command(msg: Message):
         await msg.reply(help_text)
 
-    log.Log("机器人已启动")
+    log.INFO("机器人已启动")
     bot.run()

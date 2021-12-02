@@ -1,4 +1,4 @@
-from . import pro_dir
+from . import pro_dir, log
 from threading import Thread
 import os
 import imp
@@ -34,5 +34,4 @@ def runPlugins():
         try:
             Thread(target=function.onStart(), args=("Thread-"+str(i), i)).start()
         except:
-            print("Error: unable to start thread")
-
+            log.ERROR(sender='插件管理', text="unable to start thread")

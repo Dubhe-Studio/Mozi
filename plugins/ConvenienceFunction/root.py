@@ -42,4 +42,4 @@ def onStart():
     async def music_command(msg: Message, name: str = "0"):
         await msg.reply(getMusic.getMusic(name))
 
-    log.Log("插件已载入", "便民功能")
+    log.INFO("插件已载入", "便民功能")
