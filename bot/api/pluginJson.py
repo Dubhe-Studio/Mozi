@@ -4,10 +4,10 @@ from . import pro_dir
 
 
 def readJson(name, file="config", key="settings"):
-    json_dir = pro_dir + '\\configs\\' + name
+    json_dir = os.path.join(pro_dir, 'configs', name)
     json_file = os.path.join(json_dir, file + ".json")
-    if not os.path.isdir(pro_dir + '\\configs'):
-        os.mkdir(pro_dir + '\\configs')
+    if not os.path.isdir(os.path.join(pro_dir, 'configs')):
+        os.mkdir(os.path.join(pro_dir, 'configs'))
     if not os.path.isdir(json_dir):
         os.mkdir(json_dir)
     if not os.path.isfile(json_file):
@@ -27,10 +27,10 @@ def readJson(name, file="config", key="settings"):
 
 
 def writeJson(name, file="config", key="settings", value: list = None):
-    json_dir = pro_dir + '\\configs\\' + name
+    json_dir = os.path.join(pro_dir, 'configs', name)
     json_file = os.path.join(json_dir, file + ".json")
-    if not os.path.isdir(pro_dir + '\\configs'):
-        os.mkdir(pro_dir + '\\configs')
+    if not os.path.isdir(os.path.join(pro_dir, 'configs')):
+        os.mkdir(os.path.join(pro_dir, 'configs'))
     if not os.path.isdir(json_dir):
         os.mkdir(json_dir)
     if not os.path.isfile(json_file):

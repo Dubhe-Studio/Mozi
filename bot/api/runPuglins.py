@@ -5,7 +5,7 @@ import imp
 
 
 def runPlugins():
-    plugin_dir = pro_dir + "\\plugins"
+    plugin_dir = os.path.join(pro_dir, "plugins")
     if not os.path.isdir(plugin_dir):
         os.mkdir(plugin_dir)
     x = os.listdir(plugin_dir)
@@ -18,16 +18,16 @@ def runPlugins():
     plugin_list = []
     for i in range(len(x)):
         if '.py' in x[i]:
-            plugin_list.append(plugin_dir + '\\' + x[i])
+            plugin_list.append(os.path.join(plugin_dir, x[i]))
         else:
-            y = os.listdir(plugin_dir + '\\' + x[i])
+            y = os.listdir(os.path.join(plugin_dir, x[i]))
             if '__init__.py' in y:
                 y.remove('__init__.py')
             if '__main__.py' in y:
                 y.remove('__main__.py')
             for n in range(len(y)):
                 if '.py' in y[n]:
-                    plugin_list.append(plugin_dir + '\\' + x[i] + '\\' + y[n])
+                    plugin_list.append(os.path.join(plugin_dir, x[i], y[n]))
     for i in range(len(plugin_list)):
         temp = plugin_list[i]
         function = imp.load_source('plugin-' + str(i), temp)

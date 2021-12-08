@@ -4,10 +4,10 @@ from . import pro_dir
 
 
 def getConfig(name, file="config", section="settings", param="auto"):
-    config_dir = pro_dir + '\\configs\\' + name
+    config_dir = os.path.join(pro_dir, 'configs', name)
     config = os.path.join(config_dir, file + ".conf")
-    if not os.path.isdir(pro_dir + '\\configs'):
-        os.mkdir(pro_dir + '\\configs')
+    if not os.path.isdir(os.path.join(pro_dir, 'configs')):
+        os.mkdir(os.path.join(pro_dir, 'configs'))
     if not os.path.isdir(config_dir):
         os.mkdir(config_dir)
     if not os.path.isfile(config):

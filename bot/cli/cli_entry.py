@@ -9,8 +9,9 @@ help = []
 
 
 def entry_point():
-    if os.path.isfile(pro_dir+'\\logs\\latest.log'):
-        os.rename(pro_dir+'\\logs\\latest.log', pro_dir+'\\logs\\{}.log'.format(datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime('%Y-%m-%d-%H-%M-%S')))
+
+    if os.path.isfile(os.path.join(pro_dir, 'logs', 'latest.log')):
+        os.rename(os.path.join(pro_dir, 'logs', 'latest.log'), os.path.join(pro_dir, 'logs', '{}.log'.format(datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime('%Y-%m-%d-%H-%M-%S'))))
     help.append("/help\t显示帮助")
     help_text = ""
     runPuglins.runPlugins()
