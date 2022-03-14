@@ -1,7 +1,7 @@
 from bot.api import log
 from plugins.ConvenienceFunction.lib import getAnimeImage, getSentence, getYulu, getToday, getJoke, getWeather, getMusic
 from bot.cli.cli_entry import bot, help
-from bot.lib import Message
+from khl import Message
 
 
 def onStart():

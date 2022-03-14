@@ -1,6 +1,6 @@
 import os
 import datetime
-from bot.lib import Bot, Message
+from khl import Bot, Message
 from bot.api import log, getConfig, runPuglins, pro_dir
 
 token = getConfig.getConfig("settings", "token")

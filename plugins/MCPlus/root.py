@@ -2,7 +2,7 @@ from bot.api.pluginConfig import getConfig
 from plugins.MCPlus.lib import getMcServer, getMcVersion, runCommand
 from bot.cli.cli_entry import bot, help
 from bot.api import log, pluginJson
-from bot.lib import Message
+from khl import Message
 
 
 def onStart():
