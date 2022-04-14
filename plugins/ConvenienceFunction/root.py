@@ -3,6 +3,8 @@ from plugins.ConvenienceFunction.lib import getAnimeImage, getSentence, getYulu,
 from bot.cli.cli_entry import bot, help
 from khl import Message
 
+pluginName = "便民功能"
+
 
 def onStart():
     help.append("=======================================")
@@ -42,4 +44,4 @@ def onStart():
     async def music_command(msg: Message, name: str = "0"):
         await msg.reply(getMusic.getMusic(name))
 
-    log.info("便民功能", "插件已载入")
+    log.info(pluginName, "插件已载入")

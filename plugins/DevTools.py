@@ -3,12 +3,14 @@ from bot.api.pluginConfig import getConfig
 from bot.cli.cli_entry import bot, help
 from khl import Message
 
+pluginName = "DevTools"
+
 
 def onStart():
     help.append("=======================================")
     help.append("/guildid \t查询当前服务器ID")
     help.append("/channelid \t查询当前频道ID")
-    admin_id = getConfig('DevTools', 'admin', 'admin', 'admin_id')
+    admin_id = getConfig(pluginName, 'admin', 'admin', 'admin_id')
 
     def is_op(msg: Message) -> bool:
         return msg.author.id == admin_id
@@ -27,4 +29,4 @@ def onStart():
         else:
             await msg.reply("您配吗？")
 
-    log.info("DevTools", "插件已载入")
+    log.info(pluginName, "插件已载入")
