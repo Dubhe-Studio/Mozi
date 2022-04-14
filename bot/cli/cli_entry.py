@@ -1,20 +1,38 @@
-import os
-import datetime
-from khl import Bot, Message
-from bot.api import log, getConfig, runPuglins, pro_dir
+import asyncio
 
+from khl import Bot, Message
+from bot.api import getConfig, pluginsManager, log
+
+pluginsManager = pluginsManager.pluginsManager()
 token = getConfig.getConfig("settings", "token")
-bot = Bot(token=token)
-help = []
+help:list[str] = []
+
+
+class aBot(Bot):
+    pass
+
+    def run(self):
+        if not self.loop:
+            self.loop = asyncio.get_event_loop()
+        try:
+            self.loop.run_until_complete(self.start())
+        except KeyboardInterrupt:
+            pluginsManager.stopPlugins()
+            log.logger.info('再见')
+            log.close()
+
+    def stop(self):
+        self.loop.close()
+        pass
+
+
+bot = aBot(token=token)
 
 
 def entry_point():
-
-    if os.path.isfile(os.path.join(pro_dir, 'logs', 'latest.log')):
-        os.rename(os.path.join(pro_dir, 'logs', 'latest.log'), os.path.join(pro_dir, 'logs', '{}.log'.format(datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime('%Y-%m-%d-%H-%M-%S'))))
     help.append("/help\t显示帮助")
     help_text = ""
-    runPuglins.runPlugins()
+    pluginsManager.runPlugins()
     for i in range(len(help)):
         if i == 0:
             help_text = help[0]
@@ -25,5 +43,6 @@ def entry_point():
     async def help_command(msg: Message):
         await msg.reply(help_text)
 
-    log.INFO("机器人已启动")
+    log.logger.info("机器人已启动")
     bot.run()
+

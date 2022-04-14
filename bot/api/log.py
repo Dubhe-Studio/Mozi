@@ -1,34 +1,34 @@
-import datetime
-import os
-from . import pro_dir
+import logging
+import os.path
+import time
+from bot.api import pro_dir
+
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(name)s][%(levelname)s] %(message)s')
+logger = logging.getLogger("墨子号")
+log_path = os.path.join(pro_dir, 'logs')
+log_file = os.path.join(log_path, 'laste.log')
+if not os.path.isdir(log_path):
+    os.mkdir(log_path)
+handler = logging.FileHandler(log_file, encoding='utf8')
+formatter = logging.Formatter('[%(asctime)s][%(name)s][%(levelname)s] %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 
-def __Log(text: str = None, log_type: str = 'INFO', sender: str = '控制台'):
-    utc_dt = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc)
-    asia_dt = utc_dt.astimezone(datetime.timezone(datetime.timedelta(hours=8)))
-    log_text = asia_dt.strftime('[%Y-%m-%d %H:%M:%S]') + f' [{log_type}] <{sender}> {text}'
-    file = os.path.join(pro_dir, 'logs', 'latest.log')
-    file_dir = os.path.join(pro_dir, 'logs')
-    if not os.path.isdir(file_dir):
-        os.mkdir(file_dir)
-    if os.path.isfile(file):
-        file_handle = open(file, mode='a', encoding="utf-8")
-        file_handle.write(log_text + '\n')
-    else:
-        file_handle = open(file, mode='w', encoding="utf-8")
-        file_handle.close()
-        file_handle = open(file, mode='a', encoding="utf-8")
-        file_handle.write(log_text + '\n')
-    print(log_text)
+def info(sender: str, msg: str):
+    return logger.info(f'[{sender}] '+msg)
 
 
-def INFO(text: str = None, sender: str = '控制台'):
-    __Log(text=text, sender=sender, log_type='INFO')
+def warn(sender: str, msg: str):
+    return logger.warning(f'[{sender}] '+msg)
 
 
-def WARN(text: str = None, sender: str = '控制台'):
-    __Log(text=text, sender=sender, log_type='WARN')
+def debug(sender: str, msg: str):
+    return logger.debug(f'[{sender}] '+msg)
 
 
-def ERROR(text: str = None, sender: str = '控制台'):
-    __Log(text=text, sender=sender, log_type='ERROR')
+def close():
+    handler.close()
+    nowTime = time.strftime('%Y%m%d-%H%M%S')
+    if os.path.isfile(log_file):
+        os.rename(log_file, os.path.join(log_path, f"{nowTime}.log"))

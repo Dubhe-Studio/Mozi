@@ -87,7 +87,7 @@ class StatusPing:
 
         return byte
 
-    def get_status(self):
+    async def get_status(self):
         """ Get the status response """
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as connection:
             connection.settimeout(self._timeout)
@@ -111,21 +111,21 @@ class StatusPing:
         return response
 
 
-def pingServer(hosts: str = 'localhost'):
+async def pingServer(hosts: str = 'localhost'):
     hosts = hosts
     if hosts.find(':') != -1:
         hosts = hosts.split(':')
         status_ping = StatusPing(host=hosts[0], port=int(hosts[1]))
     else:
         status_ping = StatusPing(host=hosts, port=25565)
-    return status_ping.get_status()
+    return await status_ping.get_status()
 
 
-def getServer(hosts: str = '0'):
+async def getServer(hosts: str = '0'):
     if hosts == 0:
         return "请输入服务器地址"
     else:
-        x = pingServer(hosts)
+        x = await pingServer(hosts)
         motd = x['description']['text']
         player = str(x['players']['online']) + '/' + str(x['players']['max'])
         version = x['version']['name']

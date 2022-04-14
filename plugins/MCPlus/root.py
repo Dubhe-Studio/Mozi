@@ -19,11 +19,11 @@ def onStart():
 
     @bot.command(name='mcv')
     async def mcv_command(msg: Message):
-        await msg.reply(getMcVersion.get())
+        await msg.reply(await getMcVersion.get())
 
     @bot.command(name='server')
     async def server_command(msg: Message, address: str = "0"):
-        await msg.reply(getMcServer.getServer(address))
+        await msg.reply(await getMcServer.getServer(address))
 
     def is_op(msg: Message) -> bool:
         return msg.author.id == admin_id
