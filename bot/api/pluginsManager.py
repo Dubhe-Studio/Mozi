@@ -1,6 +1,5 @@
-import threading
-
 from . import pro_dir, log
+from threading import Thread
 import os
 import imp
 
@@ -38,7 +37,7 @@ class pluginsManager:
             function = imp.load_source('plugin-' + str(plugin), plugin)
             try:
                 log.info(sender='插件管理', msg=f'插件{function.pluginName}加载中')
-                threading.Thread(target=function.onStart, name=f'{function.pluginName}').start()
+                Thread(target=function.onStart(), args=('Thread-'+str(plugin), plugin)).start()
             except:
                 log.warn(sender='插件管理', msg=f'插件{function.pluginName}加载失败')
         if len(self.plugin_list) == 0:

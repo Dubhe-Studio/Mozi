@@ -12,7 +12,8 @@ def onStart():
     help.append("/mcv\t查询最新的Minecraft版本")
     help.append("/server <address>\t获取某服务器的信息")
 
-    channel_id = pluginJson.readJson(pluginName, 'config', 'channels')
+    config = pluginJson.pluginJson(plugin=pluginName)
+    channel_id = config.read("channels")
 
     getConfig(pluginName, 'config', 'rcon', 'address')
     getConfig(pluginName, 'config', 'rcon', 'port')
@@ -38,7 +39,7 @@ def onStart():
         if is_op(msg):
             if msg.ctx.channel.id not in channel_id:
                 channel_id.append(msg.ctx.channel.id)
-                pluginJson.writeJson(pluginName, 'config', 'channels', channel_id)
+                config.write('channels', channel_id)
             await msg.reply(f"{msg.ctx.channel.id}已加入允许的频道列表")
             log.info(pluginName, f"{msg.ctx.channel.id}已加入允许的频道列表")
 
