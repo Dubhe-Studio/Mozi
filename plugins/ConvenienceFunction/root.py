@@ -1,20 +1,20 @@
 from bot.api import log
 from plugins.ConvenienceFunction.lib import getAnimeImage, getSentence, getYulu, getToday, getJoke, getWeather, getMusic
-from bot.cli.cli_entry import bot, help
+from bot.cli.cli_entry import bot, _help
 from khl import Message
 
 pluginName = "便民功能"
 
 
 def onStart():
-    help.append("=======================================")
-    help.append("/joke\t笑话")
-    help.append("/stl <pe|pc>\t获取一张二次元美图")
-    help.append("/tq <city>\t获取某城市天气")
-    help.append("/music <name>\t点歌")
-    help.append("/yl\t社会语录")
-    help.append("/lsjt\t历史今天")
-    help.append("/yy\t一言")
+    _help.append("=======================================")
+    _help.append("/joke\t笑话")
+    _help.append("/stl <pe|pc>\t获取一张二次元美图")
+    _help.append("/tq <city>\t获取某城市天气")
+    _help.append("/music <name>\t点歌")
+    _help.append("/yl\t社会语录")
+    _help.append("/lsjt\t历史今天")
+    _help.append("/yy\t一言")
 
     @bot.command(name='yl')
     async def yl_command(msg: Message):

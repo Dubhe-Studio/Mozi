@@ -1,6 +1,6 @@
 from bot.api.pluginConfig import getConfig
 from plugins.MCPlus.lib import getMcServer, getMcVersion, runCommand
-from bot.cli.cli_entry import bot, help
+from bot.cli.cli_entry import bot, _help
 from bot.api import log, pluginJson
 from khl import Message
 
@@ -8,9 +8,9 @@ pluginName = "MCPlus"
 
 
 def onStart():
-    help.append("=======================================")
-    help.append("/mcv\t查询最新的Minecraft版本")
-    help.append("/server <address>\t获取某服务器的信息")
+    _help.append("=======================================")
+    _help.append("/mcv\t查询最新的Minecraft版本")
+    _help.append("/server <address>\t获取某服务器的信息")
 
     config = pluginJson.pluginJson(plugin=pluginName)
     channel_id = config.read("channels")

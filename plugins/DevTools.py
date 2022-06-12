@@ -1,15 +1,15 @@
 from bot.api import log
 from bot.api.pluginConfig import getConfig
-from bot.cli.cli_entry import bot, help
+from bot.cli.cli_entry import bot, _help
 from khl import Message
 
 pluginName = "DevTools"
 
 
 def onStart():
-    help.append("=======================================")
-    help.append("/guildid \t查询当前服务器ID")
-    help.append("/channelid \t查询当前频道ID")
+    _help.append("=======================================")
+    _help.append("/guildid \t查询当前服务器ID")
+    _help.append("/channelid \t查询当前频道ID")
     admin_id = getConfig(pluginName, 'admin', 'admin', 'admin_id')
 
     def is_op(msg: Message) -> bool:
