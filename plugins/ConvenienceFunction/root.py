@@ -29,7 +29,7 @@ def onStart():
 
     @bot.command(name='tq', help='/tq', desc='获取某城市天气')
     async def tq_command(msg: Message, city: str = "0"):
-        await msg.reply(getWeather.getWeather(city).repr)
+        await msg.reply(getWeather.getWeather(city))
 
     @bot.command(name='music', help='/music', desc='点歌')
     async def music_command(msg: Message, name: str = "0"):
