@@ -36,3 +36,7 @@ def onStart():
         await msg.reply(getMusic.getMusic(name))
 
     log.info(pluginName, "插件已载入")
+
+
+def onStop():
+    ...

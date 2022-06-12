@@ -50,3 +50,7 @@ def onStart():
             await msg.reply(runCommand.seed())
 
     log.info(pluginName, "插件已载入")
+
+
+def onStop():
+    ...

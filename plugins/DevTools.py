@@ -27,3 +27,7 @@ def onStart():
             await msg.reply("您配吗？")
 
     log.info(pluginName, "插件已载入")
+
+
+def onStop():
+    ...
