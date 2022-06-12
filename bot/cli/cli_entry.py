@@ -7,7 +7,6 @@ from bot.api.ACommandManager import HELP
 
 pluginsManager = pluginsManager.pluginsManager()
 token = getConfig.getConfig("settings", "token")
-_help = []
 
 bot = aBot(token=token)
 
