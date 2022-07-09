@@ -6,3 +6,4 @@ logs
 *.pyc
 *.ini
 *.conf
+/test/

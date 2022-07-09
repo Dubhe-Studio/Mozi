@@ -111,7 +111,7 @@ class StatusPing:
         return response
 
 
-async def pingServer(hosts: str = 'localhost'):
+async def ping_server(hosts: str = 'localhost'):
     hosts = hosts
     if hosts.find(':') != -1:
         hosts = hosts.split(':')
@@ -121,11 +121,11 @@ async def pingServer(hosts: str = 'localhost'):
     return await status_ping.get_status()
 
 
-async def getServer(hosts: str = '0'):
+async def get_server(hosts: str = '0'):
     if hosts == 0:
         return "请输入服务器地址"
     else:
-        x = await pingServer(hosts)
+        x = await ping_server(hosts)
         motd = x['description']['text']
         player = str(x['players']['online']) + '/' + str(x['players']['max'])
         version = x['version']['name']

@@ -4,7 +4,7 @@ import os
 import imp
 
 
-class pluginsManager:
+class plugins_manager:
     plugin_dir = os.path.join(pro_dir, 'plugins')
     if not os.path.isdir(plugin_dir):
         os.mkdir(plugin_dir)
@@ -32,18 +32,18 @@ class pluginsManager:
     def __init__(self):
         log.info(sender='插件管理', msg='插件管理器已启动')
 
-    def runPlugins(self):
+    def run_plugins(self):
         for plugin in self.plugin_list:
             function = imp.load_source('plugin-' + str(plugin), plugin)
             try:
                 log.info(sender='插件管理', msg=f'插件{function.pluginName}加载中')
-                Thread(target=function.onStart(), args=('Thread-'+str(plugin), plugin)).start()
+                Thread(target=function.on_start(), args=('Thread-'+str(plugin), plugin)).start()
             except:
                 log.warn(sender='插件管理', msg=f'插件{function.pluginName}加载失败')
         if len(self.plugin_list) == 0:
             log.warn(sender='插件管理', msg='未找到插件')
 
-    def stopPlugins(self):
+    def stop_plugins(self):
         for plugin in self.plugin_list:
             function = imp.load_source('plugin-' + str(plugin), plugin)
             try:

@@ -1,18 +1,18 @@
 from khl import Message, MessageTypes
 from khl.card import Card, Module, Types, Element, Struct, CardMessage
 
-from bot.api import getConfig, pluginsManager, log
-from bot.api.ABot import aBot
-from bot.api.ACommandManager import HELP
+from bot.api import get_config, plugins_manager, log
+from bot.api.bot import ABot
+from bot.api.command_manager import HELP
 
-pluginsManager = pluginsManager.pluginsManager()
-token = getConfig.getConfig("settings", "token")
+pluginsManager = plugins_manager.plugins_manager()
+token = get_config.get_config("settings", "token")
 
-bot = aBot(token=token)
+bot = ABot(token=token)
 
 
 def entry_point():
-    pluginsManager.runPlugins()
+    pluginsManager.run_plugins()
 
     help_card = Card(Module.Header(text="命令帮助"), Module.Divider(), Module.Section(
         Struct.Paragraph(2,
@@ -29,11 +29,12 @@ def entry_point():
 
     @bot.command(name='help', help="/help", desc="显示帮助")
     async def help_command(msg: Message):
-        await msg.reply(help_card, type=MessageTypes.CARD)
+        if msg.ctx.channel.id != '11521515' and msg.ctx.channel.id != 'xxxx':
+            await msg.reply(help_card, type=MessageTypes.CARD)
 
     log.logger.info("机器人已启动")
     bot.run()
 
 
-def stopPlugins():
-    pluginsManager.stopPlugins()
+def stop_plugins():
+    pluginsManager.stop_plugins()

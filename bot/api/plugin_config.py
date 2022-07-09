@@ -3,7 +3,7 @@ import os
 from . import pro_dir
 
 
-def getConfig(name, file="config", section="settings", param="auto"):
+def get_config(name, file="config", section="settings", param="auto"):
     config_dir = os.path.join(pro_dir, 'configs', name)
     config = os.path.join(config_dir, file + ".conf")
     if not os.path.isdir(os.path.join(pro_dir, 'configs')):

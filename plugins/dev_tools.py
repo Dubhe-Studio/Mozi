@@ -1,21 +1,25 @@
 from bot.api import log
-from bot.api.pluginConfig import getConfig
+from bot.api.plugin_config import get_config
 from bot.cli.cli_entry import bot
-from khl import Message
+from khl import Message, api
 
 pluginName = "DevTools"
 
 
-def onStart():
-    admin_id = getConfig(pluginName, 'admin', 'admin', 'admin_id')
+def on_start():
+    admin_id = get_config(pluginName, 'admin', 'admin', 'admin_id')
 
     def is_op(msg: Message) -> bool:
         return msg.author.id == admin_id
 
-    @bot.command(name='guildid', help='/guildid', desc='查询当前服务器ID')
+    @bot.command(name='guild', help='/guild', desc='查询当前服务器')
     async def guildid(msg: Message):
         if is_op(msg):
             await msg.reply(msg.ctx.guild.id)
+            channels = await bot.client.gate.exec_req(api.Channel.list(guild_id=msg.ctx.guild.id))
+            for i in channels['items']:
+                if i['name'] == '🎙 语音频道':
+                    print(i)
         else:
             await msg.reply("您配吗？")
 

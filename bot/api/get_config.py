@@ -3,7 +3,7 @@ import os
 from . import pro_dir
 
 
-def getConfig(section: str, param: str):
+def get_config(section: str, param: str):
     config_path = os.path.join(pro_dir, "config.ini")
     if os.path.isfile(config_path):
         conf = configparser.ConfigParser()

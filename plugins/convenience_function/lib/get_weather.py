@@ -3,7 +3,7 @@ import json
 from khl.card import CardMessage, Card, Module
 
 
-def getWeather(city: str):
+def get_weather(city: str):
     x = requests.get('https://query.asilu.com/weather/baidu/?city=' + city)
     y = json.loads(x.text)
     city = y['city']

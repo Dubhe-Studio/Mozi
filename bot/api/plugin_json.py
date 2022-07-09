@@ -10,7 +10,7 @@ class JsonType(Enum):
     LIST = "list"
 
 
-class pluginJson:
+class PluginJson:
     _configs_dir = os.path.join(pro_dir, 'configs')
     _file = None
     _json_dir = None
@@ -53,7 +53,7 @@ class pluginJson:
         except:
             return False
 
-    def appendList(self, value) -> bool:
+    def append_list(self, value) -> bool:
         if type(self._json) != list:
             return False
         self._json.append(value)
@@ -64,13 +64,13 @@ class pluginJson:
         except:
             return False
 
-    def getKeys(self) -> list:
+    def get_keys(self) -> list:
         if type(self._json) == dict:
             return list(self._json.keys())
         elif type(self._json) == list:
             return self._json.copy()
 
-    def getValues(self) -> list:
+    def get_values(self) -> list:
         if type(self._json) == dict:
             return list(self._json.values())
         elif type(self._json) == list:
